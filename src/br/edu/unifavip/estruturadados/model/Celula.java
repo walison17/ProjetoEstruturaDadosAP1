@@ -14,7 +14,7 @@ public class Celula<T> {
     private T elemento;
     private Celula<T> proximo;
 
-    public Celula(T elemento, Celula<T> proximo) {
+    public Celula(Celula<T> proximo, T elemento) {
         this.elemento = elemento;
         this.proximo = proximo;
     }
@@ -39,4 +39,5 @@ public class Celula<T> {
         this.proximo = proximo;
     }
 
+    
 }
