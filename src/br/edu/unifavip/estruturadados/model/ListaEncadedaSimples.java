@@ -8,6 +8,7 @@ package br.edu.unifavip.estruturadados.model;
 /**
  *
  * @author walison
+ * @param <T> 
  */
 public class ListaEncadedaSimples<T> {
 
@@ -21,6 +22,7 @@ public class ListaEncadedaSimples<T> {
         this.total = 0;
     }
 
+    
     public void adicionarNoComeco(T elemento) {
         Celula<T> novaCelula = new Celula(elemento);
         novaCelula.setProximo(primeira);
@@ -35,6 +37,7 @@ public class ListaEncadedaSimples<T> {
         this.total++;
     }
 
+    
     public void adicionarNoFim(T elemento) {
         if (this.total == 0) {
             this.adicionarNoComeco(elemento);
@@ -44,24 +47,26 @@ public class ListaEncadedaSimples<T> {
         this.ultima.setProximo(novaCelula); //aponta para a nova celula
         this.ultima = novaCelula; //atualiza a referencia da ultima posicao
 
-        this.total++;
+        this.total++; //atualiza a quantidade
 
     }
 
+    
     public void adicionar(int posicao, T elemento) {
         if (this.total == 0) {
             this.adicionarNoComeco(elemento);
-        } else if (posicao == this.total) {;
+        } else if (this.total == posicao) {
             this.adicionarNoFim(elemento);
         } else {
             Celula anterior = this.getCelula(posicao - 1); //pega a celula anteior a posicao passada 
             Celula novaCelula = new Celula(anterior.getProximo(), elemento);
             anterior.setProximo(novaCelula); //atualiza o ponteiro da celula anterior para a nova Celula criada 
 
-            this.total++;
+            this.total++; //atualiza a quantidade
         }
     }
 
+    
     private Celula<T> getCelula(int posicao) {
         Celula atual = null;
 
@@ -78,10 +83,12 @@ public class ListaEncadedaSimples<T> {
         return atual;
     }
 
+    
     private boolean posicaoOcupada(int posicao) {
         return posicao >= 0 && posicao < this.total;
     }
 
+    
     public void imprimirLista() {
         Celula atual = this.primeira;
         while (atual != null) {
@@ -89,4 +96,44 @@ public class ListaEncadedaSimples<T> {
             atual = atual.getProximo();
         }
     }
+    
+    
+    public int tamanho() {
+        return this.total;
+    }   
+    
+    
+    public void removerDoComeco(){
+        if (!this.posicaoOcupada(0)) {
+            System.out.println("erro"); //configurar mensagem de erro
+        } 
+        
+        this.primeira = this.primeira.getProximo(); //atualiza a referencia
+        this.total --; //decrementa do total 
+         
+        if (this.total == 0){ // se a lista estiver vazia a ultima posicao guarda referencia de ninguem NULL
+            this.ultima = null;
+        }
+         
+    }
+    
+    public void removerDoFim() {
+        if (!posicaoOcupada(this.total - 1)) {
+            System.out.println("posicao não existe"); //configurar mensagem de erro
+        }
+
+        if (this.total == 1) {
+            this.removerDoComeco();
+        } else {
+            // to do
+        }
+    }
+    
+    public void remover(int posicao) {
+        // to do
+    }
+    
+    
+    
+    
 }
