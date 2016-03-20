@@ -12,7 +12,7 @@ package br.edu.unifavip.estruturadados.model;
 public class ListaSequencial implements IMetodosLista {
 
     //Variável que determina tamanho do vetor
-    public  int tamanho;
+    public int tamanho;
 
     //Variável que determina tamanho que o vetor vai aumentar
     public int aumentaTamanho;
@@ -23,11 +23,11 @@ public class ListaSequencial implements IMetodosLista {
     @Override
     public void povoaLista(int quantidade) {
         for (int i = 0; i < quantidade; i++) {
-            Aluno aluno = new Aluno("Aluno "+i);
+            Aluno aluno = new Aluno("Aluno " + i);
             this.adiciona(aluno);
         }
     }
-    
+
     @Override
     public void adiciona(Aluno aluno) {
         this.garantaEspaco();
@@ -68,6 +68,16 @@ public class ListaSequencial implements IMetodosLista {
     }
 
     @Override
+    public boolean contemAluno(Aluno aluno) {
+        for (int i = 0; i < this.quantAlunos; i++) {
+            if (aluno.equals(this.alunos[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public int tamanhoLista() {
         return this.quantAlunos;
     }
@@ -88,7 +98,5 @@ public class ListaSequencial implements IMetodosLista {
             this.alunos = novaArray;
         }
     }
-
-    
 
 }

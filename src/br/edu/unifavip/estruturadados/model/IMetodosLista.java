@@ -23,5 +23,6 @@ public interface IMetodosLista {
     
     public void povoaLista(int quantidade);
     
+    public boolean contemAluno(Aluno aluno);
     
 }
