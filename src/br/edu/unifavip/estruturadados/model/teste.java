@@ -23,7 +23,20 @@ public class teste {
         lista.adicionarNoFim(p1);
         
         lista.imprimirLista();
- 
+        
+        ListaSequencial listaS = new ListaSequencial();
+        listaS.tamanho = 100000;
+        listaS.aumentaTamanho = 300;
+        
+        listaS.povoaLista(500000);
+        System.out.println(listaS.tamanhoLista());
+        
+        Aluno fodase = new Aluno("Fábio");
+        listaS.adicionaQualquerPosicao(1000,fodase);
+        System.out.println(listaS.retornaAluno(1000));
+        
+        listaS.remove(1000);
+        System.out.println(listaS.retornaAluno(1000));
     } 
     
 }
