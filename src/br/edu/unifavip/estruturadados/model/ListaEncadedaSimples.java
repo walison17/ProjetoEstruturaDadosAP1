@@ -10,29 +10,30 @@ package br.edu.unifavip.estruturadados.model;
  * @author walison
  * @param <T> 
  */
-public class ListaEncadedaSimples<T> {
+public class ListaEncadedaSimples<T>  {
 
-    private Celula<T> primeira, ultima; //guarda as primeira e ultima posições da lista
+    private Link<T> primeiro, ultimo; //guarda as primeiro e ultimo posições da lista
     private int total; //guarda o tamanho da lista 
 
     //inicia a lista vazia e com valores default
     public ListaEncadedaSimples() {
-        this.primeira = null;
-        this.ultima = null;
+        this.primeiro = null;
+        this.ultimo = null;
         this.total = 0;
     }
 
     
     public void adicionarNoComeco(T elemento) {
-        Celula<T> novaCelula = new Celula(elemento);
-        novaCelula.setProximo(primeira);
-
-        //se a lista estiver vazia a ultima posicao recebe a referencia da nova celula criada
-        if (this.total == 0) {
-            this.ultima = novaCelula;
+        Link<T> novoLink = new Link(elemento);
+        
+        //se a lista estiver vazia a ultimo posicao recebe a referencia da nova celula criada        
+        if (this.estaVazia()) {
+            this.ultimo = novoLink;
         }
-        this.primeira = novaCelula;
-
+    
+        this.primeiro.setAnterior(novoLink);
+        this.primeiro = novoLink;
+        
         //atualiza a quantidade 
         this.total++;
     }
@@ -43,9 +44,11 @@ public class ListaEncadedaSimples<T> {
             this.adicionarNoComeco(elemento);
         }
 
-        Celula<T> novaCelula = new Celula(elemento);
-        this.ultima.setProximo(novaCelula); //aponta para a nova celula
-        this.ultima = novaCelula; //atualiza a referencia da ultima posicao
+        Link<T> novoLink = new Link(elemento);
+        
+        this.ultimo.setProximo(novoLink);
+        novoLink.setAnterior(ultimo);  
+        this.ultimo = novoLink;
 
         this.total++; //atualiza a quantidade
 
@@ -53,25 +56,33 @@ public class ListaEncadedaSimples<T> {
 
     
     public void adicionar(int posicao, T elemento) {
-        if (this.total == 0) {
+        if (this.estaVazia()) {
+            
             this.adicionarNoComeco(elemento);
+            
         } else if (this.total == posicao) {
+            
             this.adicionarNoFim(elemento);
+        
         } else {
-            Celula anterior = this.getCelula(posicao - 1); //pega a celula anteior a posicao passada 
-            Celula novaCelula = new Celula(anterior.getProximo(), elemento);
-            anterior.setProximo(novaCelula); //atualiza o ponteiro da celula anterior para a nova Celula criada 
-
+          
+            Link anterior = this.getLink(posicao - 1); //pega a celula anteior a posicao passada 
+            Link proxima = anterior.getProximo();
+            
+            Link novoLink = new Link(anterior.getProximo(), elemento);
+            anterior.setProximo(novoLink); //atualiza o ponteiro da celula anterior para a nova Link criada 
+            proxima.setAnterior(novoLink);
+            
             this.total++; //atualiza a quantidade
         }
     }
 
     
-    private Celula<T> getCelula(int posicao) {
-        Celula atual = null;
+    private Link<T> getLink(int posicao) {
+        Link atual = null;
 
         if (this.posicaoOcupada(posicao) == true) {
-            atual = this.primeira;
+            atual = this.primeiro;
 
             for (int i = 0; i < posicao; i++) {
                 atual = atual.getProximo();
@@ -90,7 +101,7 @@ public class ListaEncadedaSimples<T> {
 
     
     public void imprimirLista() {
-        Celula atual = this.primeira;
+        Link atual = this.primeiro;
         while (atual != null) {
             System.out.println(atual.getElemento());
             atual = atual.getProximo();
@@ -103,16 +114,21 @@ public class ListaEncadedaSimples<T> {
     }   
     
     
+    public boolean estaVazia() {
+        return (this.primeiro == null); //se a primeiro posicao estiver Null então a lista inteira esta vazia
+    }
+    
+    
     public void removerDoComeco(){
         if (!this.posicaoOcupada(0)) {
-            System.out.println("erro"); //configurar mensagem de erro
+            new IllegalStateException("erro");
         } 
         
-        this.primeira = this.primeira.getProximo(); //atualiza a referencia
+        this.primeiro = this.primeiro.getProximo(); //atualiza a referencia
         this.total --; //decrementa do total 
          
-        if (this.total == 0){ // se a lista estiver vazia a ultima posicao guarda referencia de ninguem NULL
-            this.ultima = null;
+        if (this.total == 0){ // se a lista estiver vazia a ultimo posicao guarda referencia de ninguem NULL
+            this.ultimo = null;
         }
          
     }
@@ -123,16 +139,44 @@ public class ListaEncadedaSimples<T> {
         }
 
         if (this.total == 1) {
-            this.removerDoComeco();
+            this.removerDoComeco(); 
         } else {
-            // to do
+            
+            Link<T> penultimo = this.ultimo.getAnterior();
+            penultimo.setProximo(null); //ultima posicao sempre é NULL
+            this.ultimo = penultimo; //atualiza a referencia para o penultimo link
         }
     }
     
     public void remover(int posicao) {
-        // to do
-    }
+        
+        if (!this.posicaoOcupada(posicao)) {
+        
+            throw new IllegalArgumentException("posição inválida!");
+        
+        } else if (posicao == this.total - 1) {
+            
+            this.removerDoComeco();
+            
+        } else {
+            
+            Link<T> anterior = getLink(posicao -1);
+            Link<T> atual = anterior.getProximo();
+            Link<T> proximo = atual.getProximo();
+            
+            anterior.setProximo(proximo);
+            proximo.setAnterior(anterior);
+            
+            this.total--;
+
+        }
+     }
+
     
+    public void limparLista() {
+        this.primeiro = null;
+        this.total = 0;
+    }
     
     
     

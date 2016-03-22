@@ -8,18 +8,21 @@ package br.edu.unifavip.estruturadados.model;
 /**
  *
  * @author walison
+ * @param <T> representa o tipo que será guardado no link
  */
-public class Celula<T> {
+public class Link<T> {
     
     private T elemento;
-    private Celula<T> proximo;
+    private Link<T> proximo;
+    private Link<T> anterior;
 
-    public Celula(Celula<T> proximo, T elemento) {
+    public Link(Link<T> proximo, T elemento) {
         this.elemento = elemento;
         this.proximo = proximo;
+        
     }
     
-    public Celula(T elemento){
+    public Link(T elemento){
         this.elemento = elemento;
     }
 
@@ -31,13 +34,22 @@ public class Celula<T> {
         this.elemento = elemento;
     }
 
-    public Celula<T> getProximo() {
+    public Link<T> getProximo() {
         return proximo;
     }
 
-    public void setProximo(Celula<T> proximo) {
+    public void setProximo(Link<T> proximo) {
         this.proximo = proximo;
     }
 
+    public Link<T> getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(Link<T> anterior) {
+        this.anterior = anterior;
+    }
+    
+    
     
 }

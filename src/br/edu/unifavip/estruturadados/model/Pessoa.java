@@ -6,7 +6,7 @@
 package br.edu.unifavip.estruturadados.model;
 
 /**
- *
+ * classe criada para auxiliar nos testes 
  * @author walison
  */
 public class Pessoa {
