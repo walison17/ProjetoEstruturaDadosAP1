@@ -33,7 +33,7 @@ public class Test {
  
         for (int i = 0; i < 100000; i++) {
             Pessoa aluno = new Pessoa("Aluno "+i,i);
-            lista.adiciona(aluno);
+            lista.adicionaQualquerPos(0,aluno);
         }
         
         
@@ -47,15 +47,16 @@ public class Test {
         
         
         
-        System.out.println(lista.toString());
         System.out.println(lista.tamanhoLista());
         System.out.println(lista.retornaAluno(100));
         lista.remove(100);
         System.out.println(lista.retornaAluno(100));
         Pessoa aluno = new Pessoa("Fábio",18);
-        lista.adicionaQualquerPos(10, aluno);
+        lista.adicionaQualquerPos(0, aluno);
         System.out.println(lista.contemAluno(aluno));
-        
+        lista.removeTodos();
+        System.out.println(lista.contemAluno(aluno));
+        System.out.println(lista.tamanhoLista());
         
     }
 }

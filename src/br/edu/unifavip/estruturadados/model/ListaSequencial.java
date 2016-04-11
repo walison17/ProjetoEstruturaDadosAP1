@@ -5,6 +5,8 @@
  */
 package br.edu.unifavip.estruturadados.model;
 
+import java.util.Arrays;
+
 /**
  *
  * @author fabio
@@ -21,7 +23,7 @@ public class ListaSequencial<T> {
     //Variáveis Privadas
     //Array Com Generics
     private T[] alunos = (T[]) new Object[tamanho];
-    private int quantAlunos = 0;
+    private  int quantAlunos = 0;
    
     
     public void adiciona(T elemento) {
@@ -74,7 +76,15 @@ public class ListaSequencial<T> {
         return aux;
     }
 
-   
+   public void removeTodos(){
+       
+       for (int i = 0; i < this.alunos.length; i++) {
+           this.alunos[i] = null;
+           quantAlunos--;
+       }
+       
+   }
+    
     public int tamanhoLista() {
         return this.quantAlunos;
     }
@@ -91,12 +101,11 @@ public class ListaSequencial<T> {
     private void garantaEspaco() {
 
         if (this.quantAlunos == this.alunos.length) {
-            T[] novaArray = (T[]) new Object[this.alunos.length + aumentaTamanho];
-            System.arraycopy(this.alunos, 0, novaArray, 0, this.alunos.length);
-            this.alunos = novaArray;
+            T[] novoArray = Arrays.copyOf(alunos, this.alunos.length + aumentaTamanho);
+            this.alunos = novoArray;
         }
     }
-
+    
     @Override
     public String toString() {
         if (this.quantAlunos == 0) {
