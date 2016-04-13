@@ -24,16 +24,16 @@ public class teste {
         
         lista.imprimirLista();
         
-        ListaSequencial listaS = new ListaSequencial();
+        ListaSequencial<Aluno> listaS = new ListaSequencial();
         listaS.tamanho = 100000;
         listaS.aumentaTamanho = 300;
         
         Aluno fodase = new Aluno("Fábio");
-        listaS.adicionaQualquerPos(1000,fodase);
-        System.out.println(listaS.retornaAluno(1000));
+        listaS.adicionar(1000,fodase);
+        System.out.println(listaS.pegar(1000));
         
         listaS.remove(1000);
-        System.out.println(listaS.retornaAluno(1000));
+        System.out.println(listaS.pegar(1000));
     } 
     
 }

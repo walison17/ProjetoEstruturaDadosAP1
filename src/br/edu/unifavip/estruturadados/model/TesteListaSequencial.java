@@ -1,4 +1,4 @@
-/*
+/*d
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -16,7 +16,7 @@ public class TesteListaSequencial {
     public long testeInserirFim(int quantidade){
         long tempoInicio = System.currentTimeMillis();
         for (int i = 0; i < quantidade; i++) {
-            this.listaSequencial.adiciona("testeAdd "+i);
+            this.listaSequencial.adicionar("testeAdd "+i);
         }
         long tempoFim = System.currentTimeMillis();
         
@@ -26,7 +26,7 @@ public class TesteListaSequencial {
     public long testeInserirInicio(int quantidade){
         long tempoInicio = System.currentTimeMillis();
         for (int i = 0; i < quantidade; i++) {
-            this.listaSequencial.adicionaQualquerPos(0,"testeAdd "+i);
+            this.listaSequencial.adicionarNoComeco("testeAdd "+i);
         }
         long tempoFim = System.currentTimeMillis();
         
@@ -35,7 +35,7 @@ public class TesteListaSequencial {
     
     public long testeInserirQualquerPos(int posicao){
         long tempoInicio = System.currentTimeMillis();
-        this.listaSequencial.adicionaQualquerPos(posicao, "teste");
+        this.listaSequencial.adicionar(posicao, "teste");
         long tempoFim = System.currentTimeMillis();
         
         return (tempoFim - tempoInicio);
@@ -43,7 +43,7 @@ public class TesteListaSequencial {
     
     public long testeRemoveBegin(){
         long tempoInicio = System.currentTimeMillis();
-        this.listaSequencial.remove(0);
+        this.listaSequencial.removerDoComeco();
         long tempoFim = System.currentTimeMillis();
         
         return (tempoFim - tempoInicio);
@@ -51,7 +51,7 @@ public class TesteListaSequencial {
     
     public long testeRemoveEnd(){
         long tempoInicio = System.currentTimeMillis();
-        this.listaSequencial.remove(this.listaSequencial.tamanhoLista() - 1);
+        this.listaSequencial.removerDoFim();
         long tempoFim = System.currentTimeMillis();
         
         return (tempoFim - tempoInicio);
@@ -69,7 +69,7 @@ public class TesteListaSequencial {
     
     public long testeRemoveEveryThing(){
         long tempoInicio = System.currentTimeMillis();
-        this.listaSequencial.removeTodos();
+        this.listaSequencial.limpar();
         long tempoFim = System.currentTimeMillis();
         
         return (tempoFim - tempoInicio);
@@ -77,7 +77,7 @@ public class TesteListaSequencial {
     
     public long testePega(int posicao){
        long tempoInicio = System.currentTimeMillis();
-       this.listaSequencial.retornaAluno(posicao);
+       this.listaSequencial.pegar(posicao);
        long tempoFim = System.currentTimeMillis();
        
        return (tempoFim - tempoInicio);

@@ -26,14 +26,14 @@ public class ListaSequencial<T> {
     private  int quantAlunos = 0;
    
     
-    public void adiciona(T elemento) {
+    public void adicionar(T elemento) {
         this.garantaEspaco();
         this.alunos[this.quantAlunos] = elemento;
         quantAlunos++;
     }
 
     
-    public void adicionaQualquerPos(int posicao, T elemento) {
+    public void adicionar(int posicao, T elemento) {
 
         if (!this.posicaoValida(posicao)) {
             throw new IllegalArgumentException("Posição inválida");
@@ -46,6 +46,18 @@ public class ListaSequencial<T> {
         this.quantAlunos++;
     }
 
+    public void adicionarNoComeco(T elemento){
+       if (elemento != null){
+           this.garantaEspaco();
+           for (int i = this.quantAlunos - 1; i >= 0; i--) {
+               this.alunos[i+1] = this.alunos[i];
+           }
+           this.alunos[0] = elemento;
+           this.quantAlunos++;
+       }else{
+           throw new IllegalArgumentException("Objeto nulo");
+       }
+    }
     
     public void remove(int posicao) {
         if (!this.posicaoOcupada(posicao)) {
@@ -57,8 +69,29 @@ public class ListaSequencial<T> {
         this.quantAlunos--;
     }
 
+    public void removerDoComeco(){
+        if (alunos.length > 0){
+        for (int i = 0; i < this.quantAlunos -1; i++) {
+            this.alunos[i] = this.alunos[i+1];
+        }
+        this.quantAlunos--;
+        }else{
+            throw new IllegalArgumentException("Não existe Elementos para excluir");
+        }
+    }
     
-    public T retornaAluno(int posicao) {
+    public void removerDoFim(){
+        if (alunos.length > 0){
+            for (int i = this.quantAlunos -1; i < this.quantAlunos -1; i++) {
+                this.alunos[i] = this.alunos[i+1];
+            }
+            this.quantAlunos--;
+        }else{
+            throw new IllegalArgumentException("Não existe Elementos para excluir");
+        }
+    }
+    
+    public T pegar(int posicao) {
         if (!this.posicaoOcupada(posicao)) {
             throw new IllegalArgumentException("Posição inválida");
         }
@@ -66,7 +99,7 @@ public class ListaSequencial<T> {
     }
 
     
-    public T contemAluno(T elemento) {
+    public T contem(T elemento) {
         T aux = null;
         for (int i = 0; i < this.quantAlunos; i++) {
             if (elemento.equals(this.alunos[i])) {
@@ -76,7 +109,7 @@ public class ListaSequencial<T> {
         return aux;
     }
 
-   public void removeTodos(){
+   public void limpar(){
        
        for (int i = 0; i < this.alunos.length; i++) {
            this.alunos[i] = null;
@@ -85,7 +118,7 @@ public class ListaSequencial<T> {
        
    }
     
-    public int tamanhoLista() {
+    public int tamanho() {
         return this.quantAlunos;
     }
 
