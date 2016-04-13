@@ -25,7 +25,7 @@ public class Test {
         lista.aumentaTamanho = 5000;
         
         
-                
+        
         
         tempoInicio = System.currentTimeMillis();
         System.out.println("\nCARREGANDO (inicio) -> " + tempoInicio);

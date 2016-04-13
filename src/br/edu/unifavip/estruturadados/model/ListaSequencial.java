@@ -121,6 +121,17 @@ public class ListaSequencial<T> {
     public int tamanho() {
         return this.quantAlunos;
     }
+    
+    public boolean estaVazia(){
+        boolean vazia = false;
+        
+        if (this.alunos.length == 0){
+            vazia = true;
+            return vazia;
+        }
+        
+        return vazia;
+    }
 
     //Métodos Privados da lista
     private boolean posicaoOcupada(int posicao) {
